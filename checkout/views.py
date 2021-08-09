@@ -131,7 +131,7 @@ def checkout(request):
     context = {
         'stripe_public_key': stripe_public_key,
         'client_secret': intent.client_secret,
-         'order_form': order_form,
+        'order_form': order_form,
     }
 
     return render(request, template, context)

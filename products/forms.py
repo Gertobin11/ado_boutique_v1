@@ -1,11 +1,10 @@
 from django import forms
-
-from .models import Category, Product
+from .models import Product, Category
 
 
 class ProductForm(forms.ModelForm):
 
-    class meta:
+    class Meta:
         model = Product
         fields = '__all__'
 
@@ -13,6 +12,7 @@ class ProductForm(forms.ModelForm):
         super().__init__(*args, **kwargs)
         categories = Category.objects.all()
         friendly_names = [(c.id, c.get_friendly_name()) for c in categories]
-        self.fields['categories'].choices = friendly_names
+
+        self.fields['category'].choices = friendly_names
         for field_name, field in self.fields.items():
-            field.widget.attrs['class'] = 'border_black rounded-0'
+            field.widget.attrs['class'] = 'border-black rounded-0'
